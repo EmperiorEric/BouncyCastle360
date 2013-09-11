@@ -7,7 +7,7 @@
 //
 
 #import "MyScene.h"
-
+#import <CoreMotion/CoreMotion.h>
 @interface MyScene ()
 {
     SKLabelNode *heightLabel;
@@ -27,6 +27,14 @@
     BOOL touching;
 }
 @end
+
+// TODO: Collision Detection
+// TODO: Collectibles, Avoidables
+// TODO: Score Calculation (Height + Collectibles)
+// TODO: Lose Condition = Avoidables or missing the castle (middle of castle maybe?).
+// TODO: GameOver Scene
+// TODO: Menu Scene
+// TODO: Sounds
 
 @implementation MyScene
 
@@ -109,6 +117,14 @@
         player.physicsBody.usesPreciseCollisionDetection = YES;
         
         [container addChild:player];
+        
+        
+        // Tilting
+        CMMotionManager *motionManager = [[CMMotionManager alloc] init];
+        [motionManager setAccelerometerUpdateInterval:1.0/60.0];
+        [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+            player.position = CGPointMake((CGRectGetWidth(self.frame) * accelerometerData.acceleration.x), player.position.y);
+        }];
         
     }
     return self;

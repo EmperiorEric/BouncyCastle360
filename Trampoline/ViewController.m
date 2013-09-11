@@ -9,6 +9,10 @@
 #import "ViewController.h"
 #import "MyScene.h"
 
+@interface ViewController ()
+
+@end
+
 @implementation ViewController
 
 - (void)viewDidLoad
@@ -52,5 +56,6 @@
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
+
 
 @end
