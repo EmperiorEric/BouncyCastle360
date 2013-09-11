@@ -8,7 +8,8 @@
 
 #import "MyScene.h"
 #import <CoreMotion/CoreMotion.h>
-@interface MyScene ()
+
+@interface MyScene () <SKPhysicsContactDelegate>
 {
     SKLabelNode *heightLabel;
     
@@ -28,13 +29,20 @@
 }
 @end
 
-// TODO: Collision Detection
 // TODO: Collectibles, Avoidables
 // TODO: Score Calculation (Height + Collectibles)
 // TODO: Lose Condition = Avoidables or missing the castle (middle of castle maybe?).
 // TODO: GameOver Scene
 // TODO: Menu Scene
 // TODO: Sounds
+
+typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
+    PACollisionGroupNoCollision     = 0,
+    PACollisionGroupTrampoline      = 1 << 1,
+    PACollisionGroupPlayer          = 1 << 2,
+    PACollisionGroupCollectibles    = 1 << 3,
+    PACollisionGroupAvoidables      = 1 << 4
+};
 
 @implementation MyScene
 
@@ -47,6 +55,7 @@
         // Initialize our physicsWorld
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectInset(self.frame, 0.0, -CGFLOAT_MAX)];
         [self.physicsWorld setGravity:CGVectorMake(0.0, -3.27)];
+        self.physicsWorld.contactDelegate = self;
         
         // Create an altitude label
         heightLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
@@ -61,11 +70,13 @@
         // Create a "Trampoline"
         trampoline = [SKSpriteNode spriteNodeWithImageNamed:@"bouncyCastle"];
         trampoline.position = CGPointMake(CGRectGetMidX(self.frame), 64.0);
+        trampoline.name = @"Trampoline";
         
         trampoline.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(CGRectGetWidth(trampoline.frame), 20.0)];
         trampoline.physicsBody.usesPreciseCollisionDetection = YES;
         trampoline.physicsBody.restitution = 1.15;
         trampoline.physicsBody.dynamic = NO;
+        trampoline.physicsBody.categoryBitMask = PACollisionGroupTrampoline;
         
         [container addChild:trampoline];
         
@@ -98,23 +109,34 @@
             [middleBalloons addObject:middleBalloon];
             
             SKSpriteNode *frontBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"party_balloon"];
+            frontBalloon.name = @"Front Balloon";
             frontBalloon.xScale = 0.4;
             frontBalloon.yScale = 0.4;
-            frontBalloon.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), arc4random_uniform(10000.0) + 1000.0);
+            frontBalloon.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), 600.0);
             
             [container addChild:frontBalloon];
             
             [frontBalloons addObject:frontBalloon];
+            
+            frontBalloon.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:frontBalloon.frame.size];
+            frontBalloon.physicsBody.dynamic = NO;
+            frontBalloon.physicsBody.categoryBitMask = PACollisionGroupCollectibles;
+            frontBalloon.physicsBody.contactTestBitMask = PACollisionGroupPlayer;
+            frontBalloon.physicsBody.collisionBitMask = PACollisionGroupNoCollision;
         }
         
         // Create our Player
         player = [SKSpriteNode spriteNodeWithImageNamed:@"party_person1"];
+        player.name = @"Player";
         player.xScale = 0.5;
         player.yScale = 0.5;
         player.position = CGPointMake(CGRectGetMidX(self.frame), 300.0);
         
         player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
         player.physicsBody.usesPreciseCollisionDetection = YES;
+        player.physicsBody.categoryBitMask = PACollisionGroupPlayer;
+        player.physicsBody.collisionBitMask = PACollisionGroupTrampoline;
+        player.physicsBody.contactTestBitMask = PACollisionGroupCollectibles|PACollisionGroupAvoidables;
         
         [container addChild:player];
         
@@ -204,6 +226,12 @@
 - (void)playerCoasting
 {
     [player runAction:[SKAction rotateToAngle:0.0 duration:0.5]];
+}
+
+- (void)didBeginContact:(SKPhysicsContact *)contact
+{
+    NSLog(@"BodyA: %@",contact.bodyA.node.name);
+    NSLog(@"BodyB: %@",contact.bodyB.node.name);
 }
 
 @end
