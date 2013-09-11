@@ -11,7 +11,10 @@
 
 @interface MyScene () <SKPhysicsContactDelegate>
 {
+    NSInteger score;
+    
     SKLabelNode *heightLabel;
+    SKLabelNode *scoreLabel;
     
     SKSpriteNode *trampoline;
     
@@ -58,10 +61,17 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
         self.physicsWorld.contactDelegate = self;
         
         // Create an altitude label
+        scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+        scoreLabel.fontColor = [SKColor whiteColor];
+        scoreLabel.fontSize = 28.0;
+        scoreLabel.position = CGPointMake(CGRectGetWidth(self.frame) - 64.0, CGRectGetHeight(self.frame) - 32.0);
+        [self addChild:scoreLabel];
+        
+        // Create an altitude label
         heightLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
         heightLabel.fontColor = [SKColor whiteColor];
         heightLabel.fontSize = 28.0;
-        heightLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetHeight(self.frame) - 32.0);
+        heightLabel.position = CGPointMake(64.0, CGRectGetHeight(self.frame) - 32.0);
         [self addChild:heightLabel];
         
         container = [SKNode node];
@@ -109,20 +119,31 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
             [middleBalloons addObject:middleBalloon];
             
             SKSpriteNode *frontBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"party_balloon"];
-            frontBalloon.name = @"Front Balloon";
             frontBalloon.xScale = 0.4;
             frontBalloon.yScale = 0.4;
-            frontBalloon.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), 600.0);
+            frontBalloon.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), arc4random_uniform(10000.0) + 1000.0);
             
             [container addChild:frontBalloon];
             
             [frontBalloons addObject:frontBalloon];
+        }
+        
+        // Create some collectables
+        for (int i = 0 ; i < 50; i++) {
+            SKShapeNode *coin = [SKShapeNode node];
+            coin.name = @"Coin";
+            coin.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0.0, 0.0, 44.0, 44.0)].CGPath;
+            coin.fillColor = [UIColor yellowColor];
+            coin.strokeColor = [UIColor orangeColor];
+            coin.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), arc4random_uniform(10000.0) + 1000.0);
             
-            frontBalloon.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:frontBalloon.frame.size];
-            frontBalloon.physicsBody.dynamic = NO;
-            frontBalloon.physicsBody.categoryBitMask = PACollisionGroupCollectibles;
-            frontBalloon.physicsBody.contactTestBitMask = PACollisionGroupPlayer;
-            frontBalloon.physicsBody.collisionBitMask = PACollisionGroupNoCollision;
+            coin.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:coin.frame.size];
+            coin.physicsBody.dynamic = NO;
+            coin.physicsBody.categoryBitMask = PACollisionGroupCollectibles;
+            coin.physicsBody.contactTestBitMask = PACollisionGroupPlayer;
+            coin.physicsBody.collisionBitMask = PACollisionGroupNoCollision;
+            
+            [container addChild:coin];
         }
         
         // Create our Player
@@ -168,8 +189,9 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
 
 -(void)update:(CFTimeInterval)currentTime
 {
-    // Update Height Label
-    [heightLabel setText:[NSString stringWithFormat:@"%.0f",player.position.y]];
+    // Update Labels
+    [heightLabel setText:[NSString stringWithFormat:@"%.0fft",player.position.y]];
+    [scoreLabel setText:[NSString stringWithFormat:@"%ldpts",(long)score]];
     
     // Adjust Velocity based on touch.
     if (touching) {
@@ -230,8 +252,14 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
-    NSLog(@"BodyA: %@",contact.bodyA.node.name);
-    NSLog(@"BodyB: %@",contact.bodyB.node.name);
+    if ([contact.bodyA.node.name isEqualToString:@"Coin"]) {
+        [contact.bodyA.node removeFromParent];
+        score += 10;
+    }
+    else if ([contact.bodyB.node.name isEqualToString:@"Coin"]) {
+        [contact.bodyB.node removeFromParent];
+        score += 10;
+    }
 }
 
 @end
