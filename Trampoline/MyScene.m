@@ -70,6 +70,8 @@
             SKSpriteNode *backBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"party_balloon"];
             backBalloon.xScale = 0.1;
             backBalloon.yScale = 0.1;
+            backBalloon.color = [UIColor blackColor];
+            backBalloon.colorBlendFactor = 0.4;
             backBalloon.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), arc4random_uniform(10000.0) + 1000.0);
             
             [container addChild:backBalloon];
@@ -79,6 +81,8 @@
             SKSpriteNode *middleBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"party_balloon"];
             middleBalloon.xScale = 0.2;
             middleBalloon.yScale = 0.2;
+            middleBalloon.color = [UIColor blackColor];
+            middleBalloon.colorBlendFactor = 0.2;
             middleBalloon.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), arc4random_uniform(10000.0) + 1000.0);
             
             [container addChild:middleBalloon];
