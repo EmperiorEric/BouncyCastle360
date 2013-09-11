@@ -30,6 +30,7 @@
 		EF9694AF17E0365600A510CE /* party_person4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694AC17E0365600A510CE /* party_person4@2x.png */; };
 		EF9694B117E0405C00A510CE /* party_balloon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694B017E0405C00A510CE /* party_balloon@2x.png */; };
 		EF9694B317E0BBDC00A510CE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF9694B217E0BBDC00A510CE /* CoreMotion.framework */; };
+		EF9694B617E0D73200A510CE /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9694B517E0D73200A510CE /* GameOverScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		EF9694AC17E0365600A510CE /* party_person4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_person4@2x.png"; sourceTree = "<group>"; };
 		EF9694B017E0405C00A510CE /* party_balloon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_balloon@2x.png"; sourceTree = "<group>"; };
 		EF9694B217E0BBDC00A510CE /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		EF9694B417E0D73200A510CE /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		EF9694B517E0D73200A510CE /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,8 @@
 				EF96948217E0179C00A510CE /* ViewController.m */,
 				EF96948417E0179C00A510CE /* MyScene.h */,
 				EF96948517E0179C00A510CE /* MyScene.m */,
+				EF9694B417E0D73200A510CE /* GameOverScene.h */,
+				EF9694B517E0D73200A510CE /* GameOverScene.m */,
 				EF96948717E0179C00A510CE /* Spaceship.png */,
 				EF9694A817E0350B00A510CE /* party_person1@2x.png */,
 				EF9694AA17E0365600A510CE /* party_person2@2x.png */,
@@ -286,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9694B617E0D73200A510CE /* GameOverScene.m in Sources */,
 				EF96948617E0179C00A510CE /* MyScene.m in Sources */,
 				EF96948317E0179C00A510CE /* ViewController.m in Sources */,
 				EF96947D17E0179C00A510CE /* AppDelegate.m in Sources */,

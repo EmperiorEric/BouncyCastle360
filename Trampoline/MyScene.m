@@ -7,6 +7,9 @@
 //
 
 #import "MyScene.h"
+
+#import "GameOverScene.h"
+
 #import <CoreMotion/CoreMotion.h>
 
 @interface MyScene () <SKPhysicsContactDelegate>
@@ -305,8 +308,16 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
     gameover = YES;
     
     self.backgroundColor = [SKColor redColor];
-    NSLog(@"GameOver");
-    // TODO: GameOver Scene
+    
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        GameOverScene *scene = [GameOverScene sceneWithSize:self.size];
+        [scene setScoreString:[NSString stringWithFormat:@"%ldpts",(long)score]];
+        [scene setMaxHeightString:[NSString stringWithFormat:@"%ldft",(long)maxHeightReached]];
+        
+        [self.view presentScene:scene transition:[SKTransition doorsCloseHorizontalWithDuration:0.5]];
+    });
 }
 
 @end
