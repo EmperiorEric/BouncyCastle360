@@ -12,6 +12,7 @@
 @interface MyScene () <SKPhysicsContactDelegate>
 {
     NSInteger score;
+    NSInteger maxHeightReached;
     
     SKLabelNode *heightLabel;
     SKLabelNode *scoreLabel;
@@ -189,8 +190,17 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
 
 -(void)update:(CFTimeInterval)currentTime
 {
+    // Adjust score by height
+    CGFloat height = player.position.y;
+    if (height > maxHeightReached) {
+        CGFloat delta = height - maxHeightReached;
+        maxHeightReached = height;
+        
+        score += delta;
+    }
+    
     // Update Labels
-    [heightLabel setText:[NSString stringWithFormat:@"%.0fft",player.position.y]];
+    [heightLabel setText:[NSString stringWithFormat:@"%.0fft",height]];
     [scoreLabel setText:[NSString stringWithFormat:@"%ldpts",(long)score]];
     
     // Adjust Velocity based on touch.
@@ -252,13 +262,15 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
-    if ([contact.bodyA.node.name isEqualToString:@"Coin"]) {
-        [contact.bodyA.node removeFromParent];
-        score += 10;
-    }
-    else if ([contact.bodyB.node.name isEqualToString:@"Coin"]) {
-        [contact.bodyB.node removeFromParent];
-        score += 10;
+    if (contact.bodyA.categoryBitMask == PACollisionGroupCollectibles || contact.bodyB.categoryBitMask == PACollisionGroupCollectibles) {
+        score += 500;
+        
+        if (![contact.bodyA.node.name isEqualToString:@"Player"]) {
+            [contact.bodyA.node removeFromParent];
+        }
+        else if (![contact.bodyB.node.name isEqualToString:@"Player"]) {
+            [contact.bodyB.node removeFromParent];
+        }
     }
 }
 
