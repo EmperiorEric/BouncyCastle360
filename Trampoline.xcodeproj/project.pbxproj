@@ -14,7 +14,6 @@
 		EF96947717E0179C00A510CE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF96947517E0179C00A510CE /* InfoPlist.strings */; };
 		EF96947917E0179C00A510CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96947817E0179C00A510CE /* main.m */; };
 		EF96947D17E0179C00A510CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96947C17E0179C00A510CE /* AppDelegate.m */; };
-		EF96948017E0179C00A510CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF96947E17E0179C00A510CE /* Main.storyboard */; };
 		EF96948317E0179C00A510CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96948217E0179C00A510CE /* ViewController.m */; };
 		EF96948617E0179C00A510CE /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96948517E0179C00A510CE /* MyScene.m */; };
 		EF96948817E0179C00A510CE /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = EF96948717E0179C00A510CE /* Spaceship.png */; };
@@ -48,7 +47,6 @@
 		EF96947A17E0179C00A510CE /* Trampoline-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Trampoline-Prefix.pch"; sourceTree = "<group>"; };
 		EF96947B17E0179C00A510CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EF96947C17E0179C00A510CE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EF96947F17E0179C00A510CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EF96948117E0179C00A510CE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EF96948217E0179C00A510CE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EF96948417E0179C00A510CE /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			children = (
 				EF96947B17E0179C00A510CE /* AppDelegate.h */,
 				EF96947C17E0179C00A510CE /* AppDelegate.m */,
-				EF96947E17E0179C00A510CE /* Main.storyboard */,
 				EF96948117E0179C00A510CE /* ViewController.h */,
 				EF96948217E0179C00A510CE /* ViewController.m */,
 				EF96948417E0179C00A510CE /* MyScene.h */,
@@ -243,7 +240,6 @@
 				EF96947717E0179C00A510CE /* InfoPlist.strings in Resources */,
 				EF96948A17E0179C00A510CE /* Images.xcassets in Resources */,
 				EF96948817E0179C00A510CE /* Spaceship.png in Resources */,
-				EF96948017E0179C00A510CE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,14 +290,6 @@
 				EF96947617E0179C00A510CE /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		EF96947E17E0179C00A510CE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EF96947F17E0179C00A510CE /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		EF96949917E0179C00A510CE /* InfoPlist.strings */ = {

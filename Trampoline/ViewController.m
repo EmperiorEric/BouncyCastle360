@@ -28,6 +28,11 @@
     [skView presentScene:scene];
 }
 
+- (void)loadView
+{
+    self.view = [[SKView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+}
+
 - (BOOL)shouldAutorotate
 {
     return YES;
