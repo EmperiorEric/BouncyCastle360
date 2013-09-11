@@ -161,15 +161,15 @@
     
     // Balloon
     for (SKSpriteNode *balloon in frontBalloons) {
-        [balloon setPosition:CGPointMake(balloon.position.x, (delta / 3.0) + balloon.position.y)];
+        [balloon setPosition:CGPointMake(balloon.position.x, (delta / 4.0) + balloon.position.y)];
     }
     
     for (SKSpriteNode *balloon in middleBalloons) {
-        [balloon setPosition:CGPointMake(balloon.position.x, (delta / 6.0) + balloon.position.y)];
+        [balloon setPosition:CGPointMake(balloon.position.x, (delta / 8.0) + balloon.position.y)];
     }
     
     for (SKSpriteNode *balloon in backBalloons) {
-        [balloon setPosition:CGPointMake(balloon.position.x, (delta / 9.0) + balloon.position.y)];
+        [balloon setPosition:CGPointMake(balloon.position.x, (delta / 16.0) + balloon.position.y)];
     }
     
     // Adjust sky color based on altitude
