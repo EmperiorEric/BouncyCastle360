@@ -30,13 +30,11 @@
     NSMutableArray *backBalloons;
     
     BOOL touching;
+    
+    BOOL gameover;
 }
 @end
 
-// TODO: Collectibles, Avoidables
-// TODO: Score Calculation (Height + Collectibles)
-// TODO: Lose Condition = Avoidables or missing the castle (middle of castle maybe?).
-// TODO: GameOver Scene
 // TODO: Menu Scene
 // TODO: Sounds
 
@@ -147,6 +145,24 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
             [container addChild:coin];
         }
         
+        // Create some avoidables
+        for (int i = 0; i < 20; i++) {
+            SKShapeNode *avoidable = [SKShapeNode node];
+            avoidable.name = @"Avoidable";
+            avoidable.path = [UIBezierPath bezierPathWithRect:CGRectMake(0.0, 0.0, 44.0, 44.0)].CGPath;
+            avoidable.fillColor = [UIColor redColor];
+            avoidable.strokeColor = [UIColor blackColor];
+            avoidable.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), arc4random_uniform(10000.0) + 1000.0);
+            
+            avoidable.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:avoidable.frame.size];
+            avoidable.physicsBody.dynamic = NO;
+            avoidable.physicsBody.categoryBitMask = PACollisionGroupAvoidables;
+            avoidable.physicsBody.contactTestBitMask = PACollisionGroupPlayer;
+            avoidable.physicsBody.collisionBitMask = PACollisionGroupNoCollision;
+            
+            [container addChild:avoidable];
+        }
+        
         // Create our Player
         player = [SKSpriteNode spriteNodeWithImageNamed:@"party_person1"];
         player.name = @"Player";
@@ -190,6 +206,10 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
 
 -(void)update:(CFTimeInterval)currentTime
 {
+    if (gameover) {
+        return;
+    }
+    
     // Adjust score by height
     CGFloat height = player.position.y;
     if (height > maxHeightReached) {
@@ -262,6 +282,7 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
 {
+    // Check for Collectibles
     if (contact.bodyA.categoryBitMask == PACollisionGroupCollectibles || contact.bodyB.categoryBitMask == PACollisionGroupCollectibles) {
         score += 500;
         
@@ -272,6 +293,20 @@ typedef NS_OPTIONS(NSInteger, PACollectionGroup) {
             [contact.bodyB.node removeFromParent];
         }
     }
+    
+    // Check for Avoidables
+    else if (contact.bodyA.categoryBitMask == PACollisionGroupAvoidables || contact.bodyB.categoryBitMask == PACollisionGroupAvoidables) {
+        [self gameover];
+    }
+}
+
+- (void)gameover
+{
+    gameover = YES;
+    
+    self.backgroundColor = [SKColor redColor];
+    NSLog(@"GameOver");
+    // TODO: GameOver Scene
 }
 
 @end
