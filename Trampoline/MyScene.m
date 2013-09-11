@@ -18,7 +18,11 @@
     
     SKSpriteNode *player;
     
-    SKSpriteNode *player2;
+    CGFloat lastPlayerPosition;
+    
+    NSMutableArray *frontBalloons;
+    NSMutableArray *middleBalloons;
+    NSMutableArray *backBalloons;
     
     BOOL touching;
 }
@@ -34,8 +38,9 @@
         
         // Initialize our physicsWorld
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectInset(self.frame, 0.0, -CGFLOAT_MAX)];
-        [self.physicsWorld setGravity:CGVectorMake(0.0, -5.0)];
+        [self.physicsWorld setGravity:CGVectorMake(0.0, -3.27)];
         
+        // Create an altitude label
         heightLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
         heightLabel.fontColor = [SKColor whiteColor];
         heightLabel.fontSize = 28.0;
@@ -43,6 +48,7 @@
         [self addChild:heightLabel];
         
         container = [SKNode node];
+        [self addChild:container];
         
         // Create a "Trampoline"
         trampoline = [SKSpriteNode spriteNodeWithImageNamed:@"bouncyCastle"];
@@ -55,25 +61,51 @@
         
         [container addChild:trampoline];
         
+        // Create some balloons
+        frontBalloons = [NSMutableArray array];
+        middleBalloons = [NSMutableArray array];
+        backBalloons = [NSMutableArray array];
+        
+        for (int i = 0; i < 25; i++) {
+            SKSpriteNode *backBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"party_balloon"];
+            backBalloon.xScale = 0.1;
+            backBalloon.yScale = 0.1;
+            backBalloon.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), arc4random_uniform(10000.0) + 1000.0);
+            
+            [container addChild:backBalloon];
+            
+            [backBalloons addObject:backBalloon];
+            
+            SKSpriteNode *middleBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"party_balloon"];
+            middleBalloon.xScale = 0.2;
+            middleBalloon.yScale = 0.2;
+            middleBalloon.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), arc4random_uniform(10000.0) + 1000.0);
+            
+            [container addChild:middleBalloon];
+            
+            [middleBalloons addObject:middleBalloon];
+            
+            SKSpriteNode *frontBalloon = [SKSpriteNode spriteNodeWithImageNamed:@"party_balloon"];
+            frontBalloon.xScale = 0.4;
+            frontBalloon.yScale = 0.4;
+            frontBalloon.position = CGPointMake(arc4random_uniform(CGRectGetWidth(self.frame)), arc4random_uniform(10000.0) + 1000.0);
+            
+            [container addChild:frontBalloon];
+            
+            [frontBalloons addObject:frontBalloon];
+        }
+        
         // Create our Player
         player = [SKSpriteNode spriteNodeWithImageNamed:@"party_person1"];
         player.xScale = 0.5;
         player.yScale = 0.5;
-        player.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) / 2.0);
+        player.position = CGPointMake(CGRectGetMidX(self.frame), 300.0);
         
         player.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:player.size];
         player.physicsBody.usesPreciseCollisionDetection = YES;
         
         [container addChild:player];
         
-        player2 = [SKSpriteNode spriteNodeWithImageNamed:@"party_person2"];
-        player2.xScale = 0.5;
-        player2.yScale = 0.5;
-        player2.position = CGPointMake(CGRectGetMidX(self.frame), 1000.0);
-        
-        [container addChild:player2];
-        
-        [self addChild:container];
     }
     return self;
 }
@@ -109,12 +141,12 @@
     // Strech the player on the y the faster they go.
     player.yScale = MAX(MIN(0.75, speed/2000.0), 0.5);
     
-    NSLog(@"xScale: %f yScale: %f",1000.0/speed,speed/1000.0);
-    
     // Keep player in the center of the screen
     CGFloat threshold = 320.0;
     
     CGFloat offset = MAX((player.position.y - threshold), 0.0);
+    CGFloat delta = lastPlayerPosition - player.position.y;
+    lastPlayerPosition = player.position.y;
     
     [container setPosition:CGPointMake(0.0, -offset)];
     
@@ -127,8 +159,21 @@
         player.zRotation = 0.0;
     }
     
+    // Balloon
+    for (SKSpriteNode *balloon in frontBalloons) {
+        [balloon setPosition:CGPointMake(balloon.position.x, (delta / 3.0) + balloon.position.y)];
+    }
+    
+    for (SKSpriteNode *balloon in middleBalloons) {
+        [balloon setPosition:CGPointMake(balloon.position.x, (delta / 6.0) + balloon.position.y)];
+    }
+    
+    for (SKSpriteNode *balloon in backBalloons) {
+        [balloon setPosition:CGPointMake(balloon.position.x, (delta / 9.0) + balloon.position.y)];
+    }
+    
     // Adjust sky color based on altitude
-    [self setBackgroundColor:[SKColor colorWithRed:0.0 green:0.0 blue:5000.0/(player.frame.origin.y * 2.0) alpha:1.0]];
+    [self setBackgroundColor:[SKColor colorWithRed:0.45-(player.frame.origin.y/3500.0) green:0.65-(player.frame.origin.y/4500.0) blue:2500.0/(player.frame.origin.y) alpha:1.0]];
 }
 
 - (void)playerDropping

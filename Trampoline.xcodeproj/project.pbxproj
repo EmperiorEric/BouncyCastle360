@@ -28,6 +28,7 @@
 		EF9694AD17E0365600A510CE /* party_person2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694AA17E0365600A510CE /* party_person2@2x.png */; };
 		EF9694AE17E0365600A510CE /* party_person3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694AB17E0365600A510CE /* party_person3@2x.png */; };
 		EF9694AF17E0365600A510CE /* party_person4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694AC17E0365600A510CE /* party_person4@2x.png */; };
+		EF9694B117E0405C00A510CE /* party_balloon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694B017E0405C00A510CE /* party_balloon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		EF9694AA17E0365600A510CE /* party_person2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_person2@2x.png"; sourceTree = "<group>"; };
 		EF9694AB17E0365600A510CE /* party_person3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_person3@2x.png"; sourceTree = "<group>"; };
 		EF9694AC17E0365600A510CE /* party_person4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_person4@2x.png"; sourceTree = "<group>"; };
+		EF9694B017E0405C00A510CE /* party_balloon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_balloon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				EF9694AA17E0365600A510CE /* party_person2@2x.png */,
 				EF9694AB17E0365600A510CE /* party_person3@2x.png */,
 				EF9694AC17E0365600A510CE /* party_person4@2x.png */,
+				EF9694B017E0405C00A510CE /* party_balloon@2x.png */,
 				EF9694A617E0343100A510CE /* bouncyCastle@2x.png */,
 				EF96948917E0179C00A510CE /* Images.xcassets */,
 				EF96947317E0179C00A510CE /* Supporting Files */,
@@ -259,6 +262,7 @@
 				EF96948A17E0179C00A510CE /* Images.xcassets in Resources */,
 				EF9694AD17E0365600A510CE /* party_person2@2x.png in Resources */,
 				EF96948817E0179C00A510CE /* Spaceship.png in Resources */,
+				EF9694B117E0405C00A510CE /* party_balloon@2x.png in Resources */,
 				EF9694A917E0350B00A510CE /* party_person1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
