@@ -23,6 +23,11 @@
 		EF96949317E0179C00A510CE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF96946E17E0179C00A510CE /* UIKit.framework */; };
 		EF96949B17E0179C00A510CE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF96949917E0179C00A510CE /* InfoPlist.strings */; };
 		EF96949D17E0179C00A510CE /* TrampolineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF96949C17E0179C00A510CE /* TrampolineTests.m */; };
+		EF9694A717E0343100A510CE /* bouncyCastle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694A617E0343100A510CE /* bouncyCastle@2x.png */; };
+		EF9694A917E0350B00A510CE /* party_person1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694A817E0350B00A510CE /* party_person1@2x.png */; };
+		EF9694AD17E0365600A510CE /* party_person2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694AA17E0365600A510CE /* party_person2@2x.png */; };
+		EF9694AE17E0365600A510CE /* party_person3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694AB17E0365600A510CE /* party_person3@2x.png */; };
+		EF9694AF17E0365600A510CE /* party_person4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EF9694AC17E0365600A510CE /* party_person4@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +63,11 @@
 		EF96949817E0179C00A510CE /* TrampolineTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrampolineTests-Info.plist"; sourceTree = "<group>"; };
 		EF96949A17E0179C00A510CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EF96949C17E0179C00A510CE /* TrampolineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrampolineTests.m; sourceTree = "<group>"; };
+		EF9694A617E0343100A510CE /* bouncyCastle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bouncyCastle@2x.png"; sourceTree = "<group>"; };
+		EF9694A817E0350B00A510CE /* party_person1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_person1@2x.png"; sourceTree = "<group>"; };
+		EF9694AA17E0365600A510CE /* party_person2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_person2@2x.png"; sourceTree = "<group>"; };
+		EF9694AB17E0365600A510CE /* party_person3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_person3@2x.png"; sourceTree = "<group>"; };
+		EF9694AC17E0365600A510CE /* party_person4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "party_person4@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +136,11 @@
 				EF96948417E0179C00A510CE /* MyScene.h */,
 				EF96948517E0179C00A510CE /* MyScene.m */,
 				EF96948717E0179C00A510CE /* Spaceship.png */,
+				EF9694A817E0350B00A510CE /* party_person1@2x.png */,
+				EF9694AA17E0365600A510CE /* party_person2@2x.png */,
+				EF9694AB17E0365600A510CE /* party_person3@2x.png */,
+				EF9694AC17E0365600A510CE /* party_person4@2x.png */,
+				EF9694A617E0343100A510CE /* bouncyCastle@2x.png */,
 				EF96948917E0179C00A510CE /* Images.xcassets */,
 				EF96947317E0179C00A510CE /* Supporting Files */,
 			);
@@ -237,9 +252,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9694A717E0343100A510CE /* bouncyCastle@2x.png in Resources */,
+				EF9694AE17E0365600A510CE /* party_person3@2x.png in Resources */,
 				EF96947717E0179C00A510CE /* InfoPlist.strings in Resources */,
+				EF9694AF17E0365600A510CE /* party_person4@2x.png in Resources */,
 				EF96948A17E0179C00A510CE /* Images.xcassets in Resources */,
+				EF9694AD17E0365600A510CE /* party_person2@2x.png in Resources */,
 				EF96948817E0179C00A510CE /* Spaceship.png in Resources */,
+				EF9694A917E0350B00A510CE /* party_person1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
